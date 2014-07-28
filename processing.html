@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>DALY</title>
+  <meta name="generator" content="Bootply" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <link href="css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="assets/wall/processing.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="box">
+      <div class="row">
+
+        <!-- sidebar -->
+        <div class="column col-sm-3" id="sidebar">
+          <a class="logo" href="index.html">PORTFOLIO</a>
+          <ul class="nav">
+            <li class="active"><a href="index.html">HOME</a>
+            </li>
+            <li class "active"><a href="processing.html">PROCESSING</a>
+            </li>
+            <li><a href="http://lmdaly.tumblr.com/Trails">MAPS</a>
+            </li>
+            <li class="active"><a href="bio.html">BIO</a>
+            </li>
+          </ul>
+          <ul class="nav hidden-xs" id="sidebar-footer">
+          </ul>
+        </div>
+        <!-- /sidebar -->
+
+        <!-- main -->
+        <div class="column col-sm-9" id="main">
+          <div class="padding">
+            <div class="full col-sm-9">
+
+              <!-- content -->
+
+              <div class="col-sm-12" id="featured">
+                <div class="page-header text-muted">
+                  Featured
+                </div>
+              </div>
+
+              <!--/top story-->
+
+              <div class="row">
+                <div class="col-sm-10">
+
+                  <!-- This is the processing sketch insert -->
+
+                  <div class="processing">
+                    <h3>Processing Sketch 1</h3>
+                    <p>test it out! (give a click)
+                      <p>
+                        <script type="text/processing">
+                          void setup() {
+                            size(400, 300);
+                          }
+
+                          void draw() {
+                            background(46, 230, 190);
+                            fill(242, 113, 48);
+                            triangle(-6, -6, 406, -6, mouseX, mouseY);
+                            stroke(0);
+                            strokeWeight(5);
+
+                            if (mousePressed == true) {
+                              stroke(255);
+                              fill(255);
+                              textSize(50);
+                              textAlign(CENTER, BOTTOM);
+                              text("LAURA", 200, 290);
+
+                            } else {
+                              stroke(0);
+                            }
+                          }
+                        </script>
+
+                        <canvas id="sketch"></canvas>
+
+                        <h4><a href="http://processing.org/" span class="label label-default">processing.org</a></span></h4>
+                        <h4>
+          <small class="text-muted">June 2014 • Processing Sketch Example 2</a></small>
+        </h4>
+                  </div>
+                  <!-- End processing sketch -->
+
+                  <!-- This is the processing sketch insert -->
+
+                  <div class="processing2">
+                    <h3>Processing Sketch 2</h3>
+                    <p>test it out! (mouse over and click)
+                      <p>
+
+                        <script type="text/processing">
+                          PImage img1;
+                          PImage img2;
+                          PImage img3;
+                          PImage img4;
+
+                          void setup() {
+                            size(588, 588);
+                            img1 = loadImage("assets/rollover_map/grid_rollover/w1a.png");
+                            img2 = loadImage("assets/rollover_map/grid_rollover/w2a.png");
+                            img3 = loadImage("assets/rollover_map/grid_rollover/w3a.png");
+                            img4 = loadImage("assets/rollover_map/grid_rollover/w4a.png");
+                          }
+
+                          void draw() {
+                            background(0);
+                            stroke(255);
+                            line(294, 0, 294, 588);
+                            line(0, 294, 588, 294);
+
+                            if (mouseX < 294 && mouseY < 294) {
+                              //    rect(0,0,294,294);
+                              image(img1, 0, 0);
+                            } else if (mouseX > 294 && mouseY < 294) {
+                              //    rect(294,0,294,294);
+                              image(img2, 294, 0);
+                            } else if (mouseX < 294 && mouseY > 294) {
+                              //    rect(0,294,294,294);
+                              image(img3, 0, 294);
+                            } else if (mouseX > 294 && mouseY > 294) {
+                              //    rect(294,294,588,588);
+                              image(img4, 294, 294);
+                            }
+
+                            if (mousePressed == true) {
+                              filter(INVERT);
+                            }
+                          }
+                        </script>
+
+                        <canvas id="sketch2"></canvas>
+                  </div>
+                  <!-- End processing sketch -->
+
+                  <h4><a href="http://processing.org/" span class="label label-default">processing.org</a></span></h4>
+                  <h4>
+                    <small class="text-muted">June 2014 • Processing Sketch Example 2</a></small>
+                  </h4>
+                </div>
+              </div>
+
+              <!-- end page content -->
+              <div class="col-sm-12 ">
+                <div class="page-header text-muted divider ">
+                  Contact
+                </div>
+              </div>
+
+              <div class="row ">
+                <div class="col-sm-6 ">
+                  <a href="#">Laura Daly</a>  <small class="text-muted">|</small>
+                  <a href="http://lmdaly.tumblr.com/ ">Tumblr</a>  <small class="text-muted ">|</small>
+                  <a href="http://www.greeninfo.org/ ">GreenInfo Network</a>  <small class="text-muted ">|</small>
+                  <div class="col-sm-2 ">
+                    <a href="http://lmdaly.tumblr.com/" class="pull-right ">
+                      <img src="assets/image/LD.jpg " class="img-circle ">
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+
+              <div class="row " id="footer ">
+                <div class="col-sm-6 ">
+
+                </div>
+                <div class="col-sm-6 ">
+                  <p>
+                    <a href="# " class="pull-right ">©Copyright Inc.</a>
+                  </p>
+                </div>
+              </div>
+
+
+            </div>
+            <!-- /col-9 -->
+          </div>
+          <!-- /padding -->
+        </div>
+        <!-- /main -->
+
+      </div>
+    </div>
+  </div>
+  <!-- script references -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js "></script>
+  <script src="js/bootstrap.min.js "></script>
+  <script src="js/scripts.js "></script>
+</body>
+
+</html>
