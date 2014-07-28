@@ -82,7 +82,7 @@ a {
 }
 
 #main {
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255,255,255,0.8);
 }
 #main .img-circle {
   margin-top:18px;
@@ -91,9 +91,9 @@ a {
 }
 
 #sidebar, #sidebar a {
-    color:#ffffff;
+    color:#000000;
     background-color:transparent;
-	  text-shadow:1px 0 1px #888888;
+	  text-shadow:1px 0 1px #ffffff;
 }
 #sidebar a.logo {
   display:block;
@@ -107,7 +107,6 @@ a {
   font-weight:200;
   text-align:center;
   text-decoration:none;
-  text-shadow:5px 5px 0 #B3FFD1;
   font-family: 'Anton', sans-serif;
 }
 #sidebar-footer {
