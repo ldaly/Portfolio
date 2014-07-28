@@ -72,7 +72,7 @@ a {
     position: absolute;
     right: 0;
     top: 0;
-    background-image:url('https://ldaly.github.io/Portfolio/assets/image/basemap.jpg');
+    background-image:url('https://raw.githubusercontent.com/ldaly/Portfolio/gh-pages/assets/image/basemap.jpg');
     background-size:cover;
     background-attachment:fixed;
 }
