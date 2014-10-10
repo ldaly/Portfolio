@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ACCESS</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="leaflet-0.7.3/leaflet.css" />
+	<style>
+
+		#map {
+			width: 500px;
+			height: 600px;
+		}
+
+/*STYLE to the info window*/
+		.info{
+			padding: 6px 8px;
+			font: 14px/16px Droid Sans, Helvetica, sans-serif;
+			background: white;
+			background: rgba(255,255,255,0.8);
+			box-shadow: 0 0 15px rgba(0,0,0,0.2);
+			border-radius: 5px;
+			'leaflet-0.7.3/images/logo.png';
+		}
+
+		.info h4 {
+			margin: 0 0 5px;
+			color: #99431C;
+		}
+/* Do I even want a class legend? Or am I just giving up because the color squares don't work?
+		.legend {
+			line-height: 18px;
+			color: #555;
+		}
+
+		.legend i {
+			width: 18px;
+			height 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.7;
+		}*/
+
+	</style>
+</head>
+
+<body>
+	<div id="map"></div>
+	<script src="leaflet-0.7.3/leaflet.js"></script>
+	<script src="leaflet-0.7.3/data/counties.geojson" type="text/javascript"></script>
+	<script type="text/javascript">
+		var map = L.map('map').setView([37.372188, -119.247820], 6);
+
+		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+			maxZoom: 13,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'examples.map-20v6611k'
+		}).addTo(map);
+
+		var sf = L.marker([37.760375, -122.444412]).bindPopup('x Providers'),
+			  alameda = L.marker([37.811385, -122.208206]).bindPopup('x Providers Here'),
+		    contracosta = L.marker([37.947962, -122.259017]).bindPopup('x Providers in CCC');
+
+		var counties = L.layerGroup([sf, alameda, contracosta]);
+
+//add controls here
+		var info = L.control();
+
+		info.onAdd = function(map) {
+			this._div = L.DomUtil.create('div', 'info'); //this creates a div with a class "info"
+			this.update();
+			return this._div;
+		};
+
+		 // HERE add which attributes show up in popup
+		info.update = function(props) {
+			this._div.innerHTML = '<h4>Total Number of Callers</h4>' + (props ?
+				'<b>' + props.NAME + '</b><br />' + props.total + ' callers' //NAME and total match attributes
+				: 'Hover over a county');
+		};
+		info.addTo(map);
+
+		 //choropleth fill -- by total callers. "connect" below with "feature.properties.total"
+		function getColor(t) {
+			return t > 115 ? '#a63603' :
+				t > 68 ? '#e6550d' :
+				t > 30 ? '#fd8d3c' :
+				t > 10 ? '#fdae6b' :
+				t > 0 ? '#fdd0a2' :
+				'#feedde';
+		}
+
+		 //HERE -- getColor is assigned to feature -- properties -- then the field you want to symbolize, TOTAL!!! :)
+		function style(feature) {
+			return {
+				fillColor: getColor(feature.properties.total),
+				weight: .5,
+				opacity: 1,
+				color: 'white',
+				fillOpacity: 0.7
+			};
+		}
+
+
+		 //INTERACTIVE portion -- define event listener for layer mouseover event
+		function highlightFeature(e) {
+			var layer = e.target;
+			info.update(layer.feature.properties); //this added after for controls
+
+			//set styles for when the layer is hovered over
+			layer.setStyle({
+				weight: 2,
+				color: '#703114',
+				fillOpacity: 0.9
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera) {
+				layer.bringToFront();
+			}
+		}
+
+		 //DONT FORGET THIS PART
+		var geojson;
+
+		 //Define MOUSEOUT
+		function resetHighlight(e) {
+			geojson.resetStyle(e.target);
+			info.update();
+		}
+
+		 //this click listener zooms to the state
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+
+		 //ADD the listeners to the state layer
+		function onEachFeature(feature, layer) {
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
+
+		geojson = L.geoJson(callers, {
+			style: style,
+			onEachFeature: onEachFeature
+		}).addTo(map);
+
+
+
+//ADD legend for choropleth -- DO I EVEN WANT THIS LEGEND?
+// var legend = L.control({position: 'bottomright'});
+//
+// legend.onAdd = function (map) {
+// 	var div= L.DomUtil.create('div', 'info legend'),
+// 	grades = [0, 10, 30, 68, 115,284],
+// 	labels = [];
+//
+// 	//this will loop through intervals and generate a label with a color square for each
+//     for (var i = 0; i < grades.length; i++) {
+//         div.innerHTML +=
+//             '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+//             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+//     }
+//     return div;
+// };
+//
+// legend.addTo(map);
+
+	</script>
+</body>
+
+</html>
