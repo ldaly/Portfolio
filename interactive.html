@@ -65,12 +65,95 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Mapping source of callers</h1>
+                        <h2>Mapping source of callers</h2>
                         <h3>ACCESS, Oakland, CA</h3>
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                         <div>
-                          <iframe width='520px' height='620px' frameBorder="0" src="assets/Leaflet/index_leaflet.html"></iframe>
-                        </div>
+                          <iframe width='450px' height='537px' frameBorder="0" src="assets/Leaflet/index_leaflet.html"></iframe>
+                        </div><br>
+
+                        <!-- This is the processing sketch insert -->
+
+                        <div class="processing">
+                          <h2>Learning Processing</h2>
+                          <p>test it out! (give a click)</p>
+                              <script type="text/processing">
+                                void setup() {
+                                  size(400, 300);
+                                }
+
+                                void draw() {
+                                  background(46, 230, 190);
+                                  fill(242, 113, 48);
+                                  triangle(-6, -6, 406, -6, mouseX, mouseY);
+                                  stroke(0);
+                                  strokeWeight(5);
+
+                                  if (mousePressed == true) {
+                                    stroke(255);
+                                    fill(255);
+                                    textSize(50);
+                                    textAlign(CENTER, BOTTOM);
+                                    text("LAURA", 200, 290);
+
+                                  } else {
+                                    stroke(0);
+                                  }
+                                }
+                              </script>
+                              <canvas id="sketch"></canvas>
+                            </div>
+                        <!-- End processing sketch -->
+
+<!-- This is the processing sketch insert -->
+
+<div class="processing2">
+  <h3>Processing Sketch 2</h3>
+  <p>test it out! (mouse over and click)</p>
+
+      <script type="text/processing">
+        PImage img1;
+        PImage img2;
+        PImage img3;
+        PImage img4;
+
+        void setup() {
+          size(588, 588);
+          img1 = loadImage("assets/rollover_map/grid_rollover/w1a.png");
+          img2 = loadImage("assets/rollover_map/grid_rollover/w2a.png");
+          img3 = loadImage("assets/rollover_map/grid_rollover/w3a.png");
+          img4 = loadImage("assets/rollover_map/grid_rollover/w4a.png");
+        }
+
+        void draw() {
+          background(0);
+          stroke(255);
+          line(294, 0, 294, 588);
+          line(0, 294, 588, 294);
+
+          if (mouseX < 294 && mouseY < 294) {
+            //    rect(0,0,294,294);
+            image(img1, 0, 0);
+          } else if (mouseX > 294 && mouseY < 294) {
+            //    rect(294,0,294,294);
+            image(img2, 294, 0);
+          } else if (mouseX < 294 && mouseY > 294) {
+            //    rect(0,294,294,294);
+            image(img3, 0, 294);
+          } else if (mouseX > 294 && mouseY > 294) {
+            //    rect(294,294,588,588);
+            image(img4, 294, 294);
+          }
+
+          if (mousePressed == true) {
+            filter(INVERT);
+          }
+        }
+      </script>
+  <canvas id="sketch2"></canvas>
+</div>
+<!-- End processing sketch -->
+
                     </div>
                 </div>
             </div>
