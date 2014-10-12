@@ -5,6 +5,12 @@
  */
 
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+.carto1 {
+    align: left;
+    padding: 10px;
+    margin: 10px;
+    }
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
