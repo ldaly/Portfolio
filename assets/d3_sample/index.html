@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Monetary Contributions</title>
+		<script type="text/javascript" src="http://d3js.org/d3.v3.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Hind:300,500' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			
+			body {
+				background-color: #DEFFF2;
+				font-family: 'Hind', sans-serif;
+			}
+
+			h1 {
+				font-family: 'Hind'; font-weight: 500;
+				font-size: 27px;
+				color: white;
+				padding-left: 8px;
+				margin: 0;
+				background-color: #D9543C;
+			}
+
+			h4 {
+				font-size: 14px;
+				font-family: 'Hind'; font-weight: 300;
+				color: white;
+				margin: 0;
+				padding-left: 8px;
+				background-color: #D9543C;
+			}
+
+			p {
+				font-size: 12px;
+				font-family: 'Hind'; font-weight: 300;
+				color: white;
+				padding-left: 5px;
+				background-color: #D9543C;
+			}
+
+			.title {
+				background-color: #8C2D1C;
+			}
+
+			svg {
+				background-color: #DEFFF2;
+			}
+
+			circle:hover {
+				fill: #D9543C;
+				stroke: white;
+			}
+			
+			.axis path,
+			.axis line {
+				fill: none;
+/*				stroke: black;
+*/				stroke: #8C2D1C;
+				shape-rendering: crispEdges;
+			}
+			
+
+/*I turned this y.axis part off in order to actually see the y axis */
+			/*.y.axis path,
+			.y.axis line {
+				opacity: 0;
+			}*/
+
+			.axis text {
+				font-family: 'Hind';
+				font-weight 300;
+				font-size: 11px;
+				fill: #8C2D1C;
+
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="title">
+		<h1>Summary of Monetary Contributions in the Oakland Election*</h1>
+
+		<h4>The chart shows the percent of total contributions that came from Oakland residents vs. the total contributions received during the 2014 city Mayoral and City Council elections.</h4>
+	</div>
+		<script type="text/javascript">		
+
+			var w = 650;
+			var h = 580;
+			var padding = [ 15, 30, 40, 80 ];  //Top, right, bottom, left
+
+			var xScale = d3.scale.linear()
+								.range([ padding[3], w - padding[1] ]);
+			
+			var yScale = d3.scale.linear()
+								.range([ padding[0], h - padding[2] ]);
+
+			var formatter = d3.format("$,");
+
+			var xAxis = d3.svg.axis()
+							.scale(xScale)
+							.orient("bottom")
+							.tickFormat(function(d) {
+								return formatter(d);
+							})
+							;
+
+			var yAxis = d3.svg.axis()
+							.scale(yScale)
+							.orient("left")
+							.tickFormat(function(d) {
+								return d + "%";
+							});
+
+
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+			
+		
+
+			d3.csv("Totals_Mod5.csv", function(data) {
+				//example typed  in by LD
+				//console.log(data);
+				//console.log(data.map(function(d) {return d.Name;} ));
+
+				// data.sort(function(a, b) {
+				// 	return d3.ascending(+a.percent, +b.percent);
+				// });
+
+				xScale.domain([ 
+					0, 
+					d3.max(data, function(d) {
+					return +d.grandTotal;
+				}) ]);
+
+				yScale.domain([ 
+					d3.max(data, function(d) {
+					return +d.percent;
+				}),
+					0
+					]);
+
+				var circles = svg.selectAll("circle")
+								.data(data)
+								.enter()
+								.append("circle")
+								.attr("fill", "#8C2D1C");
+
+				circles.attr("cx", function(d) {
+						return xScale(d.grandTotal);
+						})
+					
+					.attr("cy", function(d) {
+						return yScale(d.percent);
+						})
+					.attr("r", 0.3)
+					.append("title")
+					.text(function(d) {
+						return d.Name + ": "+ d.percent+ "% of Total Contributions are from Oakland.  Total Contributions = "+ formatter(d.grandTotal);
+					});
+
+				circles.sort(function(a,b) {
+					return d3.descending(+a.grandTotal, +b.grandTotal);
+						})
+					.transition()
+					.delay(function(d, i) {
+						return i * 50;
+					})
+					.duration(2000)
+					.attr("r", function(d) {
+						return (xScale(d.grandTotal)/30);
+					});
+
+
+				svg.append("g")
+					.attr("class", "x axis")
+					.attr("transform", "translate(0," + (h - padding[2]) + ")")
+					.call(xAxis);
+
+				svg.append("g")
+					.attr("class", "y axis")
+					.attr("transform", "translate(" + (padding[3] - 5) + ",0)")
+					.call(yAxis);
+
+			});
+
+
+		</script>
+	<div class="title">
+		<p>*The data that is displayed is a summary for a selection of city council and mayoral candidates in the 2014 election cycle in Oakland, CA. Some Filer Names have been shortened for display purposes. <br>Data source: <a href="https://data.oaklandnet.com/"> City of Oakland Public Ethics Commission</a></p>
+	</div>
+	</body>
+</html>
