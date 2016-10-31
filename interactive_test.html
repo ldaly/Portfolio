@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Laura Daly</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="assets/wall/processing.js"></script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.html">
+                        Laura Daly
+                    </a>
+                </li>
+                <li>
+                    <a href="bikestudy.html">Pollution Exposure to Cyclists</a>
+                </li>
+                <li>
+                    <a href="pastoral.html">Pastoralists & Policy</a>
+                </li>
+                    <li>
+                  <a href="bosque.html">Forest for a Living</a>
+              </li>
+               <li>
+                  <a href="civic.html">Civic-Minded</a>
+              </li>
+              <li>
+                  <a href="carto.html">Cartography</a>
+              </li>
+                <li>
+                    <a href="interactive.html">Interactive</a>
+                </li>
+                <li>
+                    <a href="sound.html">Sound of a Helicopter</a>
+                </li>
+                <li>
+                  <a href="access.html">Health Justice</a>
+                </li>
+                <li>
+                  <a href="envir.html">Environmental Analysis</a>
+                </li>
+                <li>
+                  <a href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        
+                     
+                      <!-- This is the 3d insert -->
+
+                        <div class="processing">
+                          <h2>Visualizing the Trek</h2>
+                          <h4>A 3D look at the trail to La Ciudad Perdida in Colombia</h4><p> The green to red color palette represents the the angle of the slope, from flat (green) to steep (red). This map was created using QGIS and the Qgis2threejs plugin.</p>
+                  
+                              <div>
+                                <iframe width=100% height='680' frameBorder="0" src="assets/SlopeMap/index.html"></iframe>
+                              </div>
+                            </div>
+                        <!-- End 3d sketch -->
+
+                         <!-- This is the d3 map insert -->
+
+                        <div class="processing">
+                          <h2>Learning D3</h2>
+                          <h4>Visualizing Monetary Campaign Contributions</h4>
+                          <p>(refresh browser to view animation!)</p>
+                              <div>
+                                <iframe width=100% height='650' frameBorder="0" src="assets/d3_sample/index.html"></iframe>
+                              </div>
+                            </div>
+                        <!-- End d3 map -->
+
+                        <!--START OF accesss map -->
+                        <h2>Mapping Source of Callers</h2>
+                        <a href="http://accesswhj.org/"><h4>ACCESS Women's Health Justice, Oakland, CA</h4></a>
+                        <p>The number of calls made to the ACCESS Healthline, by County (2003-2012)</p>
+                        <div>
+                          <iframe width='450px' height='550px' frameBorder="0" src="assets/Leaflet/index_leaflet.html"></iframe>
+                        </div>
+
+                        <!-- This is the processing sketch insert -->
+
+                        <div class="processing">
+                          <h2>Learning Processing</h2>
+                          <h4>Processing Sketch 1</h4>
+                          <p>test it out! (give a click)</p>
+                              <script type="text/processing">
+                                void setup() {
+                                  size(400, 300);
+                                }
+
+                                void draw() {
+                                  background(46, 230, 190);
+                                  fill(242, 113, 48);
+                                  triangle(-6, -6, 406, -6, mouseX, mouseY);
+                                  stroke(0);
+                                  strokeWeight(5);
+
+                                  if (mousePressed == true) {
+                                    stroke(255);
+                                    fill(255);
+                                    textSize(50);
+                                    textAlign(CENTER, BOTTOM);
+                                    text("LAURA", 200, 290);
+
+                                  } else {
+                                    stroke(0);
+                                  }
+                                }
+                              </script>
+                              <canvas id="sketch"></canvas>
+                            </div>
+                        <!-- End processing sketch -->
+
+<!-- This is the processing sketch insert -->
+
+<div class="processing2">
+  <h4>Processing Sketch 2</h4>
+  <p>test it out! (mouse over and click)</p>
+
+      <script type="text/processing">
+        PImage img1;
+        PImage img2;
+        PImage img3;
+        PImage img4;
+
+        void setup() {
+          size(588, 588);
+          img1 = loadImage("assets/rollover_map/grid_rollover/w1a.png");
+          img2 = loadImage("assets/rollover_map/grid_rollover/w2a.png");
+          img3 = loadImage("assets/rollover_map/grid_rollover/w3a.png");
+          img4 = loadImage("assets/rollover_map/grid_rollover/w4a.png");
+        }
+
+        void draw() {
+          background(0);
+          stroke(255);
+          line(294, 0, 294, 588);
+          line(0, 294, 588, 294);
+
+          if (mouseX < 294 && mouseY < 294) {
+            //    rect(0,0,294,294);
+            image(img1, 0, 0);
+          } else if (mouseX > 294 && mouseY < 294) {
+            //    rect(294,0,294,294);
+            image(img2, 294, 0);
+          } else if (mouseX < 294 && mouseY > 294) {
+            //    rect(0,294,294,294);
+            image(img3, 0, 294);
+          } else if (mouseX > 294 && mouseY > 294) {
+            //    rect(294,294,588,588);
+            image(img4, 294, 294);
+          }
+
+          if (mousePressed == true) {
+            filter(INVERT);
+          }
+        }
+      </script>
+  <canvas id="sketch2"></canvas>
+</div>
+<!-- End processing sketch -->
+<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
